@@ -37,8 +37,7 @@ sudo systemctl enable --now dnsmasq
 sudo systemctl disable systemd-resolved.service
 sudo systemctl stop systemd-resolved
 sudo sh -c 'echo "search stronghold.brown.edu services.brown.edu\nnameserver 127.0.0.1" > /etc/resolv.conf'
-sudo vi /etc/NetworkManager/NetworkManager.conf #[main] dns=none
-sudo sed -i 's/^\[main\]$/[main]\ndns=none/' /etc/NetworkManager/NetworkManager.conf
+sudo sed -i 's/^\[main\]$/[main]\ndns=none\nrc-manager=unmanaged/' /etc/NetworkManager/NetworkManager.conf
 sudo apt autoremove
 
 # add device w/ qr code
