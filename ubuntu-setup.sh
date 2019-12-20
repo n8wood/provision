@@ -121,3 +121,25 @@ for dd in /usr/share/applications; do
 done
 
 #xdg-mime default pcmanfm.desktop inode/directory
+
+# link to git dotfiles
+if [[ -d ~/src/dotfiles/.config.${HOSTNAME} ]]; then
+  cd ~/.config
+  for config in $(ls ~/src/dotfiles/.config.${HOSTNAME} 2>/dev/null); do
+    if [[ -d $config ]]; then
+      rm -rf $config
+    fi
+    ln -s -f ~/src/dotfiles/.config.${HOSTNAME}/$config
+  done
+fi
+if [[ -d ~/src/dotfiles/.config.default ]]; then
+  cd ~/.config
+  for config in $(ls ~/src/dotfiles/.config.default 2>/dev/null); do
+    if [[ ! -L ~/.config/$config ]]; then
+      if [[ -d $config ]]; then
+        rm -rf $config
+      fi
+      ln -s ~/src/dotfiles/.config.default/$config
+    fi
+  done
+fi
