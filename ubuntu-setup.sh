@@ -37,9 +37,6 @@ echo $sudopw | sudo -S update-alternatives --set editor /usr/bin/vim.basic
 echo $sudopw | sudo -S systemctl set-default multi-user.target
 echo $sudopw | sudo -S apt autoremove
 
-# add device w/ qr code
-syncthing &
-
 ubuntu-drivers autoinstall
 
 # i3-gaps
@@ -77,8 +74,9 @@ libinput-gestures-setup start
 echo $sudopw | sudo -S adduser n docker
 newgrp docker
 #~/src/docker/f5vpn/
-echo $sudopw | sudo -S ~/src/docker/f5vpn/build-image.sh
-
+cd ~/src/docker/f5vpn/
+echo $sudopw | sudo -S ./build-image.sh
+cd
 
 # console boot 16x32 (hidpi)
 #echo $sudopw | sudo -S dpkg-reconfigure console-setup
@@ -145,7 +143,7 @@ if [[ -d ~/src/dotfiles/.config.default ]]; then
 fi
 
 # dnsmasq setup
-ln -s ~/src/dotfiles/etc/dnsmasq.d/default /etc/dnsmasq.d/default
+echo $sudopw | sudo -S ln -s ~/src/dotfiles/etc/dnsmasq.d/default /etc/dnsmasq.d/default
 echo $sudopw | sudo -S systemctl enable --now dnsmasq
 echo $sudopw | sudo -S systemctl disable systemd-resolved.service
 echo $sudopw | sudo -S systemctl stop systemd-resolved
@@ -156,3 +154,6 @@ unset gitpw
 unset sudopw
 
 echo "firefox hidpi: about:config layout.css.devPixelsPerPx 1.6\n"
+# add device w/ qr code
+syncthing &
+
