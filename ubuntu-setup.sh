@@ -70,6 +70,8 @@ newgrp input
 git clone https://github.com/bulletmark/libinput-gestures.git
 cd libinput-gestures
 echo $sudopw | sudo -S make install
+libinput-gestures-setup autostart
+libinput-gestures-setup start
 
 # docker
 echo $sudopw | sudo -S adduser n docker
@@ -79,7 +81,7 @@ echo $sudopw | sudo -S ~/src/docker/f5vpn/build-image.sh
 
 
 # console boot 16x32 (hidpi)
-echo $sudopw | sudo -S dpkg-reconfigure console-setup
+#echo $sudopw | sudo -S dpkg-reconfigure console-setup
 
 # media keys - available in repos
 #wget https://github.com/acrisci/playerctl/releases/download/v0.6.0/playerctl-0.6.0_amd64.deb
