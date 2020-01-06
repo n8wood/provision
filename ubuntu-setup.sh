@@ -21,7 +21,7 @@ read -s -p "enter github pw: " gitpw &&
 git clone "https://n8wood:${gitpw}@github.com/n8wood/dotfiles"
 git clone https://n8wood:${gitpw}@github.com/n8wood/docker 
 cd
-rm -rf ~/.config/user-dirs.dirs ~/.bashrc ~/.gtkrc-2.0 Desktop Music Videos Templates Documents Downloads Public Pictures examples.desktop
+rm -rf ~/.config/user-dirs.dirs ~/.bashrc ~/.profile ~/.gtkrc-2.0 Desktop Music Videos Templates Documents Downloads Public Pictures examples.desktop
 mkdir ~/tmp
 ln -s ~/sync/doc ~/doc
 ln -s ~/sync/img ~/img
