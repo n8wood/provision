@@ -76,15 +76,15 @@ cd
 #echo $sudopw | sudo -S dpkg -i playerctl-0.6.0_amd64.deb 
 
 # dns suffix
-echo $sudopw | sudo -S sh -c 'echo "supersede domain-name-server 127.0.0.1;\nprepend domain-search \"stronghold.brown.edu\", \"services.brown.edu\", \"dam.brown.edu\", \"ccv.brown.edu\";" >> /etc/dhcp/dhclient.conf'
+echo $sudopw | sudo -S sh -c 'echo -e "supersede domain-name-server 127.0.0.1;\nprepend domain-search \"stronghold.brown.edu\", \"services.brown.edu\", \"dam.brown.edu\", \"ccv.brown.edu\";" >> /etc/dhcp/dhclient.conf'
 
 # lid/sleep lock
-echo $sudopw | sudo -S sh -c 'echo "[Unit]\nDescription=i3lock on suspend\nAfter=sleep.target\n\n[Service]\nUser=n\nType=forking\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/i3lock -i /home/n/img/lockscreen.png\n\n[Install]\nWantedBy=sleep.target\n" > /etc/systemd/system/lock.service'
+echo $sudopw | sudo -S sh -c 'echo -e "[Unit]\nDescription=i3lock on suspend\nAfter=sleep.target\n\n[Service]\nUser=n\nType=forking\nEnvironment=DISPLAY=:0\nExecStart=/usr/bin/i3lock -i /home/n/img/lockscreen.png\n\n[Install]\nWantedBy=sleep.target\n" > /etc/systemd/system/lock.service'
 echo $sudopw | sudo -S systemctl daemon-reload
 echo $sudopw | sudo -S systemctl enable lock
 
 # rc.local
-echo $sudopw | sudo -S sh -c 'echo "[Unit]\nDescription=/etc/rc.local Compatibilit\nConditionPathExists=/etc/rc.local\n\n[Service]\nType=forking\nExecStart=/etc/rc.local start\nTimeoutSec=0\nStandardOutput=tty\nRemainAfterExit=yes\nSysVStartPriority=99\n\n[Install]\nWantedBy=multi-user.target\n" > /etc/systemd/system/rc-local.service'
+echo $sudopw | sudo -S sh -c 'echo -e "[Unit]\nDescription=/etc/rc.local Compatibilit\nConditionPathExists=/etc/rc.local\n\n[Service]\nType=forking\nExecStart=/etc/rc.local start\nTimeoutSec=0\nStandardOutput=tty\nRemainAfterExit=yes\nSysVStartPriority=99\n\n[Install]\nWantedBy=multi-user.target\n" > /etc/systemd/system/rc-local.service'
 echo $sudopw | sudo -S sh -c 'echo "#!/bin/bash\nexit 0" > /etc/rc.local'
 echo $sudopw | sudo -S chmod +x /etc/rc.local
 echo $sudopw | sudo -S systemctl daemon-reload
@@ -137,8 +137,8 @@ echo $sudopw | sudo -S ln -s ~/src/dotfiles/etc/dnsmasq.d/default /etc/dnsmasq.d
 echo $sudopw | sudo -S systemctl enable --now dnsmasq
 echo $sudopw | sudo -S systemctl disable systemd-resolved.service
 echo $sudopw | sudo -S systemctl stop systemd-resolved
-echo $sudopw | sudo -S sh -c 'rm -f /etc/resolv.conf'
-echo $sudopw | sudo -S sh -c 'echo "search stronghold.brown.edu services.brown.edu\nnameserver 127.0.0.1" > /etc/resolv.conf'
+echo $sudopw | sudo -S rm -f /etc/resolv.conf
+echo $sudopw | sudo -S sh -c 'echo -e "search stronghold.brown.edu services.brown.edu\nnameserver 127.0.0.1" > /etc/resolv.conf'
 echo $sudopw | sudo -S sed -i 's/^\[main\]$/[main]\ndns=none\nrc-manager=unmanaged/' /etc/NetworkManager/NetworkManager.conf
 
 # libinput gestures
