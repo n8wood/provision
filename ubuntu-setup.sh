@@ -35,7 +35,7 @@ ln -s ~/src/dotfiles/.fonts ~/.fonts
 ln -s ~/src/dotfiles/.icons ~/.icons
 echo $sudopw | sudo -S update-alternatives --set editor /usr/bin/vim.basic
 echo $sudopw | sudo -S systemctl set-default multi-user.target
-echo $sudopw | sudo -S apt autoremove
+echo $sudopw | sudo -S apt autoremove -y
 
 ubuntu-drivers autoinstall
 
@@ -59,16 +59,6 @@ cd build
 cmake ..
 make -j$(nproc)
 echo $sudopw | sudo -S make install
-
-# libinput gestures
-cd ~/src
-echo $sudopw | sudo -S adduser n input
-newgrp input
-git clone https://github.com/bulletmark/libinput-gestures.git
-cd libinput-gestures
-echo $sudopw | sudo -S make install
-libinput-gestures-setup autostart
-libinput-gestures-setup start
 
 # docker
 echo $sudopw | sudo -S adduser n docker
@@ -149,6 +139,16 @@ echo $sudopw | sudo -S systemctl disable systemd-resolved.service
 echo $sudopw | sudo -S systemctl stop systemd-resolved
 echo $sudopw | sudo -S sh -c 'echo "search stronghold.brown.edu services.brown.edu\nnameserver 127.0.0.1" > /etc/resolv.conf'
 echo $sudopw | sudo -S sed -i 's/^\[main\]$/[main]\ndns=none\nrc-manager=unmanaged/' /etc/NetworkManager/NetworkManager.conf
+
+# libinput gestures
+cd ~/src
+echo $sudopw | sudo -S adduser n input
+#newgrp input
+git clone https://github.com/bulletmark/libinput-gestures.git
+cd libinput-gestures
+echo $sudopw | sudo -S make install
+libinput-gestures-setup autostart
+libinput-gestures-setup start
 
 unset gitpw
 unset sudopw
