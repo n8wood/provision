@@ -158,3 +158,4 @@ echo "firefox hidpi: about:config layout.css.devPixelsPerPx 1.6\n"
 # add device w/ qr code
 syncthing &
 
+# sudo dpkg-reconfigure libdvd-pkg
