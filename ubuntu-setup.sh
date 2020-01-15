@@ -64,8 +64,8 @@ echo $sudopw | sudo -S make install
 echo $sudopw | sudo -S adduser n docker
 newgrp docker
 #~/src/docker/f5vpn/
-cd ~/src/docker/f5vpn/
-echo $sudopw | sudo -S ./build-image.sh
+#cd ~/src/docker/f5vpn/
+#echo $sudopw | sudo -S ./build-image.sh
 cd
 
 # console boot 16x32 (hidpi)
